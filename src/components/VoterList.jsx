@@ -8,7 +8,7 @@ const VoterList = () => {
 
   // Fetch voter list
   useEffect(() => {
-    fetch("https://voter-server.jita.onrender.com/voters")
+    fetch("http://voter-server.jita.onrender.com/voters")
       .then((response) => response.json())
       .then((data) => setVoters(data))
       .catch((error) => console.error("Error loading voter data:", error));
@@ -16,27 +16,28 @@ const VoterList = () => {
 
   // Handle login
   const handleLogin = () => {
-    fetch("https://voter-server.jita.onrender.com/login", {
+    fetch("http://voter-server.jita.onrender.com/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username, password }),
     })
       .then((response) => response.json())
       .then((data) => {
-        if (data.username) {
+        if (data.error) {
+          alert(data.error);
+        } else {
           setLoggedInUser(data.username);
           setUsername("");
           setPassword("");
-        } else {
-          alert("Invalid login credentials");
         }
       })
+      
       .catch((error) => console.error("Login error:", error));
   };
 
   // Handle logout
   const handleLogout = () => {
-    fetch("https://voter-server.jita.onrender.com/logout", { method: "POST" })
+    fetch("http://voter-server.jita.onrender.com/logout", { method: "POST" })
       .then(() => setLoggedInUser(null))
       .catch((error) => console.error("Logout error:", error));
   };
