@@ -16,7 +16,7 @@ const VoterList = () => {
 
   // Handle login
   const handleLogin = () => {
-    fetch("http://localhost:3000/login", {
+    fetch("https://5g8fz7h6-3000.asse.devtunnels.ms/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username, password }),
@@ -36,7 +36,7 @@ const VoterList = () => {
 
   // Handle logout
   const handleLogout = () => {
-    fetch("http://localhost:3000/logout", { method: "POST" })
+    fetch("https://5g8fz7h6-3000.asse.devtunnels.ms/logout", { method: "POST" })
       .then(() => setLoggedInUser(null))
       .catch((error) => console.error("Logout error:", error));
   };
