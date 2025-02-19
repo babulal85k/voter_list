@@ -8,7 +8,7 @@ const VoterList = () => {
 
   // Fetch voter list
   useEffect(() => {
-    fetch("https://voter-server-jjta.onrender.com:10000/voters")
+    fetch("https://voter-server-jjta.onrender.com/voters")
       .then((response) => response.json())
       .then((data) => setVoters(data))
       .catch((error) => console.error("Error loading voter data:", error));
@@ -16,7 +16,7 @@ const VoterList = () => {
 
   // Handle login
   const handleLogin = () => {
-    fetch("https://voter-server-jjta.onrender.com:10000/login", {
+    fetch("https://voter-server-jjta.onrender.com/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username, password }),
@@ -36,7 +36,7 @@ const VoterList = () => {
 
   // Handle logout
   const handleLogout = () => {
-    fetch("https://voter-server-jjta.onrender.com:10000/logout", {
+    fetch("https://voter-server-jjta.onrender.com/logout", {
       method: "POST",
     })
       .then(() => setLoggedInUser(null))
@@ -56,7 +56,7 @@ const VoterList = () => {
       );
 
       // Save changes to backend
-      fetch("https://voter-server-jjta.onrender.com:10000/save-voters", {
+      fetch("https://voter-server-jjta.onrender.com/save-voters", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updatedVoters),
