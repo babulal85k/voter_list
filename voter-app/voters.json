@@ -3,13 +3,13 @@
     "id": 1,
     "name": "Rahul Sharma",
     "father_name": "Anil Sharma",
-    "marked": true
+    "marked": false
   },
   {
     "id": 2,
     "name": "Pooja Verma",
     "father_name": "Suresh Verma",
-    "marked": true
+    "marked": false
   },
   {
     "id": 3,
@@ -27,6 +27,6 @@
     "id": 5,
     "name": "Sandeep Yadav",
     "father_name": "Rajesh Yadav",
-    "marked": true
+    "marked": false
   }
 ]
