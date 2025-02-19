@@ -67,70 +67,92 @@ const VoterList = () => {
   };
 
   return (
-    <div className="p-4 max-w-lg mx-auto bg-white shadow-md rounded-lg mt-5">
-      <h2 className="text-xl font-bold mb-4 text-center">Voter List</h2>
-
-      {/* Login Form */}
-      {!loggedInUser ? (
-        <div className="mb-4 flex flex-col items-center space-y-3">
-          <input
-            type="text"
-            placeholder="Username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            className="border p-3 rounded w-full max-w-sm"
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="border p-3 rounded w-full max-w-sm"
-          />
-          <button
-            onClick={handleLogin}
-            className="bg-blue-500 text-white px-5 py-3 rounded w-full max-w-sm text-lg"
-          >
-            Login
-          </button>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-500 to-purple-600 p-4">
+      <div className="w-full max-w-3xl bg-white rounded-xl shadow-2xl overflow-hidden">
+        {/* Header */}
+        <div className="bg-gradient-to-r from-blue-600 to-purple-700 p-6 text-center">
+          <h2 className="text-3xl font-bold text-white">Voter List</h2>
         </div>
-      ) : (
-        <div className="mb-4 flex justify-between items-center">
-          <span className="text-green-600 font-medium text-lg">
-            Logged in as {loggedInUser}
-          </span>
-          <button
-            onClick={handleLogout}
-            className="bg-red-500 text-white px-4 py-2 rounded text-sm"
-          >
-            Logout
-          </button>
-        </div>
-      )}
 
-      {/* Voter List */}
-      <ul className="space-y-3">
-        {voters.map((voter) => (
-          <li
-            key={voter.id}
-            className="flex items-center justify-between p-3 bg-gray-100 rounded-lg"
-          >
-            <div className="flex flex-col">
-              <span className="font-medium text-lg">{voter.name}</span>
-              <span className="text-sm text-gray-600">
-                Father: {voter.father_name}
-              </span>
+        {/* Login Form or Logged-in Info */}
+        <div className="p-6">
+          {!loggedInUser ? (
+            <div className="space-y-4">
+              <input
+                type="text"
+                placeholder="Username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+              />
+              <input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+              />
+              <button
+                onClick={handleLogin}
+                className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-all"
+              >
+                Login
+              </button>
             </div>
-            <input
-              type="checkbox"
-              checked={voter.marked}
-              onChange={() => handleMarkChange(voter.id)}
-              className="h-6 w-6 text-blue-600"
-              disabled={!loggedInUser} // Disable if not logged in
-            />
-          </li>
-        ))}
-      </ul>
+          ) : (
+            <div className="flex justify-between items-center">
+              <span className="text-green-600 font-semibold text-lg">
+                Welcome, {loggedInUser}!
+              </span>
+              <button
+                onClick={handleLogout}
+                className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-all"
+              >
+                Logout
+              </button>
+            </div>
+          )}
+        </div>
+
+        {/* Voter List Table */}
+        <div className="p-6 overflow-x-auto">
+          <table className="w-full border-collapse border border-gray-300">
+            <thead>
+              <tr className="bg-gray-200">
+                <th className="p-3 border border-gray-300">#</th>
+                <th className="p-3 border border-gray-300">Voter Name</th>
+                <th className="p-3 border border-gray-300">Father's Name</th>
+                <th className="p-3 border border-gray-300">Marked</th>
+              </tr>
+            </thead>
+            <tbody>
+              {voters.map((voter, index) => (
+                <tr
+                  key={voter.id}
+                  className={`${
+                    index % 2 === 0 ? "bg-gray-50" : "bg-white"
+                  } hover:bg-gray-100 transition-all`}
+                >
+                  <td className="p-3 border border-gray-300 text-center">
+                    {index + 1}
+                  </td>
+                  <td className="p-3 border border-gray-300">{voter.name}</td>
+                  <td className="p-3 border border-gray-300">{voter.father_name}</td>
+                  <td className="p-3 border border-gray-300 text-center">
+                    <input
+                      type="checkbox"
+                      checked={voter.marked}
+                      onChange={() => handleMarkChange(voter.id)}
+                      className="w-5 h-5 cursor-pointer"
+                      disabled={!loggedInUser}
+                    />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   );
 };
